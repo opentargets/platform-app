@@ -1,0 +1,6 @@
+fragment diseaseOtarProjectsFragment on Disease {
+  id
+  otarProjects {
+    status
+  }
+}

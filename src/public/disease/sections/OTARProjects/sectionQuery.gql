@@ -1,0 +1,11 @@
+query OtarProjects($efoId: String!) {
+  disease(efoId: $efoId) {
+    id
+    otarProjects {
+      projectName
+      status
+      otarCode
+      reference
+    }
+  }
+}

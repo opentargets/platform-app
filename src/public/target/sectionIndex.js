@@ -1,5 +1,5 @@
 // TODO: see if this can be done dynamically
-//       or try @babel/plugin-proposal-export-namespace-from (may need eject)
+// or try @babel/plugin-proposal-export-namespace-from (may need eject)
 
 import * as bibliographyRaw from './sections/Bibliography';
 import * as cancerBiomarkersRaw from './sections/CancerBiomarkers';
@@ -18,6 +18,7 @@ import * as safetyRaw from './sections/Safety';
 import * as tepRaw from './sections/Tep';
 import * as tractabilityRaw from './sections/Tractability';
 import * as variationRaw from './sections/Variation';
+import * as abcRaw from './sections/ABC';
 
 export const bibliography = bibliographyRaw;
 export const cancerBiomarkers = cancerBiomarkersRaw;
@@ -36,3 +37,4 @@ export const safety = safetyRaw;
 export const tep = tepRaw;
 export const variation = variationRaw;
 export const tractability = tractabilityRaw;
+export const abc = abcRaw;

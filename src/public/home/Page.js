@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import { Link, NavBar, Footer } from 'ot-ui';
+import { Link, NavBar } from 'ot-ui';
 
 import Splash from './Splash';
 // import Stats from './Stats';
@@ -10,6 +10,7 @@ import HomeBox from './HomeBox';
 import { label } from '../../utils/global';
 import searchExamples from './searchExamples';
 import Search from '../common/search/Search';
+import CustomFooter from '../common/CustomFooter';
 import { externalLinks, mainMenuItems } from '../../constants';
 
 const useStyles = makeStyles({
@@ -88,7 +89,7 @@ const HomePage = () => {
       </Grid>
       {/* remove for integration day  */}
       {/* <Stats /> */}
-      <Footer externalLinks={externalLinks} />
+      <CustomFooter externalLinks={externalLinks} />
     </>
   );
 };

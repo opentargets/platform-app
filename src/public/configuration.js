@@ -1,24 +1,12 @@
 export const targetSectionsDefaultOrder = [
-  'knownDrugs',
   'tractability',
-  'safety',
-  'tep',
-  'chemicalProbes',
-  'bibliography',
-  'variation',
-  'expressions',
-  'proteinAnnotations',
-  'orthologs',
-  'geneOntology',
-  // 'proteinInteractions',
-  'pathways',
-  'relatedTargets',
-  'mousePhenotypes',
-  'hallmarks',
+  'abc',
   'cancerBiomarkers',
+  'knownDrugs',
 ];
 
 export const diseaseSectionsDefaultOrder = [
+  'otarProjects',
   'ontology',
   'knownDrugs',
   'phenotypes',

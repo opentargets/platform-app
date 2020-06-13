@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
-import { Page, NavBar, Footer } from 'ot-ui';
+import { Page, NavBar } from 'ot-ui';
 
 import { externalLinks, mainMenuItems } from '../../constants';
 import Search from './search/Search';
+import CustomFooter from './CustomFooter';
 
 const useStyles = makeStyles({
   searchContainer: {
@@ -27,7 +28,7 @@ const BasePage = ({ children }) => {
           items={mainMenuItems}
         />
       }
-      footer={<Footer externalLinks={externalLinks} />}
+      footer={<CustomFooter externalLinks={externalLinks} />}
     >
       <Helmet
         defaultTitle="Open Targets Platform"
