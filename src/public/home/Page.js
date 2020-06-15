@@ -7,7 +7,6 @@ import { Link, NavBar } from 'ot-ui';
 import Splash from './Splash';
 // import Stats from './Stats';
 import HomeBox from './HomeBox';
-import { label } from '../../utils/global';
 import searchExamples from './searchExamples';
 import Search from '../common/search/Search';
 import CustomFooter from '../common/CustomFooter';
@@ -52,24 +51,12 @@ const HomePage = () => {
         <HomeBox name="Platform">
           <Search autoFocus />
           <Grid className={classes.links} container justify="space-around">
-            <Link to={`/target/${targets[0].id}`}>
-              {targets[0].label.toUpperCase()}
-            </Link>
-            <Link to={`/target/${targets[1].id}`}>
-              {targets[1].label.toUpperCase()}
-            </Link>
-            <Link to={`/disease/${diseases[0].id}`}>
-              {label(diseases[0].label)}
-            </Link>
-            <Link to={`/disease/${diseases[1].id}`}>
-              {label(diseases[1].label)}
-            </Link>
-            <Link to={`/drug/${drugs[0].id}`}>
-              {drugs[0].label.toUpperCase()}
-            </Link>
-            <Link to={`/drug/${drugs[1].id}`}>
-              {drugs[1].label.toUpperCase()}
-            </Link>
+            <Link to={`/target/${targets[0].id}`}>{targets[0].label}</Link>
+            <Link to={`/target/${targets[1].id}`}>{targets[1].label}</Link>
+            <Link to={`/disease/${diseases[0].id}`}>{diseases[0].label}</Link>
+            <Link to={`/disease/${diseases[1].id}`}>{diseases[1].label}</Link>
+            <Link to={`/drug/${drugs[0].id}`}>{drugs[0].label}</Link>
+            <Link to={`/drug/${drugs[1].id}`}>{drugs[1].label}</Link>
           </Grid>
           <Grid
             className={classes.api}
