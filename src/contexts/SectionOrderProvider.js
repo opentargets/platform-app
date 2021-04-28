@@ -18,10 +18,8 @@ function SectionOrderProvider({ sections, children }) {
   };
 
   const shouldRender = section => {
-    const { hasData, external } = section.props.definition;
-
-    //TODO: review this.
-    return external || (data && hasData(data?.[entity])) || false;
+    const { hasData } = section.props.definition;
+    return (data && hasData(data?.[entity])) || false;
   };
 
   return (

@@ -2,8 +2,10 @@ export const definition = {
   id: 'orthologs',
   name: 'Comparative Genomics',
   shortName: 'CG',
-  hasData: data => data.orthologueCount > 0,
-  external: true,
+  hasData: data => {
+    console.log('hasData data', data);
+    return data.orthologueCount > 0;
+  },
 };
 
 export { default as Summary } from './Summary';

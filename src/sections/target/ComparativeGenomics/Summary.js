@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 import SummaryItem from '../../../components/Summary/SummaryItem';
+import usePlatformApi from '../../../hooks/usePlatformApi';
 
 const speciesSubset = [
   'homo_sapiens',
@@ -23,6 +24,7 @@ function Summary({ definition, id: ensgId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [data, setData] = useState();
+  const { externalData, setExternalData } = usePlatformApi();
 
   useEffect(
     () => {
@@ -58,15 +60,20 @@ function Summary({ definition, id: ensgId }) {
 
           if (isCurrent) {
             setData({ orthologueCount, numSpecies: speciesSet.size });
+            setExternalData(
+              { orthologueCount, numSpecies: speciesSet.size },
+              'comparativeGenomics'
+            );
             setLoading(false);
           }
         });
 
       return () => {
+        console.log('ComparativeGenomics summary unmounted');
         isCurrent = false;
       };
     },
-    [ensgId]
+    [ensgId, setExternalData]
   );
 
   return (

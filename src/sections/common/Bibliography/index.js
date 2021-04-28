@@ -3,7 +3,6 @@ export const definition = {
   name: 'Bibliography',
   shortName: 'B',
   hasData: data => data.count > 0,
-  external: true,
 };
 
 export { default as Summary } from './Summary';
