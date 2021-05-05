@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
+import Konami from 'react-konami-code';
 
 import OtUiThemeProvider from './components/OtUiThemeProvider';
 import client from './client';
@@ -23,6 +24,10 @@ class App extends Component {
     initLocalStorage();
   }
 
+  rr = () => {
+    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  };
+
   render() {
     return (
       <ApolloProvider client={client}>
@@ -41,6 +46,7 @@ class App extends Component {
             </Switch>
           </Router>
         </OtUiThemeProvider>
+        <Konami action={this.rr} />
       </ApolloProvider>
     );
   }
