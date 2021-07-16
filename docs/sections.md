@@ -10,7 +10,9 @@ src
             ├── index.js
             ├── Summary.js
             ├── Body.js
-            └── Description.js
+            ├── Description.js
+            ├── <sectionId>SummaryFragment.gql
+            └── <sectionId>Query.gql
 ```
 
 The following describe all the files in detail, following the simple [TEP section](https://github.com/opentargets/platform-app/tree/alpha/src/sections/target/Tep) from the `target` entity page as an example.
@@ -44,18 +46,10 @@ This component is in charge of handling the data acquisition for the summary, an
 
 ![Section summary example](Summary.png)
 
-If the section uses [Open Target's GraphQL API](https://platform-api-alpha.opentargets.io/api/v4/graphql/browser), it must include a `fragments` field with the query. This is used to add the data to the context provider used by the profile page:
+If the section uses [Open Target's GraphQL API](https://platform-api-alpha.opentargets.io/api/v4/graphql/browser), it must include a `fragments` field with the query. This is used to add the data to the context provider used by the profile page. The query should be imported as a separate .gql file whenever possible.
 
 ```javascript
-const TEP_SUMMARY_FRAGMENT = gql`
-  fragment TepSummaryFragment on Target {
-    id
-    tep {
-      uri
-      name
-    }
-  }
-`;
+const TEP_SUMMARY_FRAGMENT = loader('./TepSummaryFragment.gql');
 
 function Summary({ definition }) {
   // ...
@@ -87,12 +81,12 @@ It is also worth noting that the for sections using [Open Target's GraphQL API](
 
 ```javascript
 function Summary({ definition }) {
-  const { loading, error, data } = usePlatformApi(TEP_SUMMARY_FRAGMENT);
+  const request = usePlatformApi(TEP_SUMMARY_FRAGMENT);
 
   return (
     <SummaryItem
       definition={definition}
-      request={{ loading, error, data }}
+      request={request}
       renderSummary={() => 'Available'}
     />
   );
@@ -132,6 +126,29 @@ const Section = ({ definition, label: symbol }) => {
 };
 ```
 
+Other cases might need a specific separate query: this can be loaded with the `useQuery` hook:
+
+```javascript
+const INDICATIONS_QUERY = loader('./IndicationsQuery.gql');
+
+function Body({ definition, id: chemblId, label: name }) {
+  const request = useQuery(INDICATIONS_QUERY, { variables: { chemblId } });
+
+  return (
+    <SectionItem
+      definition={definition}
+      request={request}
+      renderDescription={() => <Description name={name} />}
+      renderBody={data => {
+        const { rows } = data.drug.indications;
+
+        return <DataTable columns={columns} rows={rows} />;
+      }}
+    />
+  );
+}
+```
+
 ## <a name="description"></a>`Description.js`
 
 This component contains the description shown in the section's body's title bar:
@@ -150,6 +167,49 @@ function Description({ symbol }) {
       .
     </>
   );
+}
+```
+
+## <a name="summary-query"></a>`<sectionId>SummaryFragment.gql`
+
+This is the `gql` query fragment for the summary described above.
+
+```javascript
+fragment TepSummaryFragment on Target {
+  id
+  tep {
+    uri
+    name
+  }
+}
+```
+
+## <a name="section-query"></a>`<sectionId>Query.gql`
+
+This is the `gql` query for the Body of this section.
+
+```javascript
+query IndicationsQuery($chemblId: String!) {
+  drug(chemblId: $chemblId) {
+    id
+    indications {
+      rows {
+        maxPhaseForIndication
+        disease {
+          id
+          name
+          therapeuticAreas {
+            id
+            name
+          }
+        }
+        references {
+          ids
+          source
+        }
+      }
+    }
+  }
 }
 ```
 
